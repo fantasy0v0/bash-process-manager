@@ -32,7 +32,13 @@ start() {
 # 停止程序
 stop() {
   getPid
-  kill -9 $getPid_result
+  kill $getPid_result
+  echo "waiting for application to exit."
+  while [ -e "/proc/$getPid_result" ]
+  do 
+    sleep 1;
+  done
+  echo "application exited."
 }
 
 # 程序状态
